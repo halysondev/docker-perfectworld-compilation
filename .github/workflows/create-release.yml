@@ -4,8 +4,6 @@ on:
   push:
     branches: [ "main" ]
     tags: [ 'v*.*.*' ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   release:
@@ -18,25 +16,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Get the current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
+      - name: Get the current date and time
+        id: datetime
+        run: echo "RELEASE_TAG=release-$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
       
-      # Create Release
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: release-${{ steps.date.outputs.date }}
-          release_name: Release ${{ steps.date.outputs.date }}
-          draft: false
-          prerelease: false
+      # Este passo é responsável por criar uma nova tag git
+      - name: Create a new tag
+        run: git tag $RELEASE_TAG && git push origin $RELEASE_TAG
 
-      - name: Upload assets to Release
+      # Agora, crie a release com a tag recém-criada
+      - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ env.RELEASE_TAG }}
           files: |
             Dockerfile
             Dockerfile.bullseye
