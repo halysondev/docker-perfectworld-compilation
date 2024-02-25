@@ -64,7 +64,15 @@ RUN apt install -y --fix-missing libcurl4 libcurl4-openssl-dev
 
 RUN apt install -y --fix-missing libmariadb3 libmariadb-dev
 
-RUN apt install -y --fix-missing upx
+RUN apt install -y --fix-missing wget tar xz-utils
+
+RUN wget https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz
+
+RUN tar -xf upx-3.96-amd64_linux.tar.xz
+
+RUN mv upx-3.96-amd64_linux/upx /usr/local/bin/
+
+RUN rm -r upx-3.96-amd64_linux upx-3.96-amd64_linux.tar.xz
 
 # Cria o diretorio e ajusta as permissoes
 RUN mkdir /PWServer && chmod -R 0777 /PWServer
