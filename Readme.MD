@@ -25,6 +25,8 @@
 
 ## Table Of Contents
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/87fc65a3c4014c3ab57a4bcebb99c515)](https://app.codacy.com/gh/halysondev/docker-perfectworld-compilation?utm_source=github.com&utm_medium=referral&utm_content=halysondev/docker-perfectworld-compilation&utm_campaign=Badge_Grade)
+
 * [About the Project](#about-the-project)
 * [Built With](#built-with)
 * [Getting Started](#getting-started)
