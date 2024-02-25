@@ -74,14 +74,19 @@ git clone https://github.com/halysondev/docker-perfectworld-compilation.git
 
 2. Build the Docker image:
 
-Build Image Latest:
+Build Image Debian Bookworm:
 ```sh
 docker build --no-cache -t pwsourcedev:latest .
 ```
 
-Build Image Bullseye:
+Build Image Debian Bullseye:
 ```sh
 docker build --no-cache -t pwsourcedev:bullseye -f Dockerfile.bullseye .
+```
+
+Build Image Ubuntu Jammy:
+```sh
+docker build --no-cache -t pwsourcedev:ubuntu -f Dockerfile.ubuntu .
 ```
 
 ## Running the Container on Windows (PowerShell 7)

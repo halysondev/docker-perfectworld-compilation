@@ -32,6 +32,7 @@ jobs:
           files: |
             Dockerfile
             Dockerfile.bullseye
+            Dockerfile.ubuntu
             entrypoint.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

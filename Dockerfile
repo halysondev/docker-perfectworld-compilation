@@ -1,6 +1,8 @@
 # Especifica a imagem base
 FROM debian:bookworm
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Adiciona arquitetura i386
 RUN dpkg --add-architecture i386 
 
