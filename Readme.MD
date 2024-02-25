@@ -82,6 +82,7 @@ to
 pwsourcedev:bullseye
 ```
 
+Build Image:
 ```sh
 docker build --no-cache -t pwsourcedev:latest .
 ```
