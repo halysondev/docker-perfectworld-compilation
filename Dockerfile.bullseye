@@ -108,3 +108,5 @@ RUN chmod +x /entrypoint.sh
 
 # Define o script como ponto de entrada
 ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["/bin/bash"]
