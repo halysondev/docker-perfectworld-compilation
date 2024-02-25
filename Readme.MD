@@ -21,7 +21,7 @@
   </p>
 </p>
 
-![Contributors](https://img.shields.io/github/contributors/halysondev/docker-perfectworld-compilation?color=dark-green) ![Forks](https://img.shields.io/github/forks/halysondev/docker-perfectworld-compilation?style=social) ![Stargazers](https://img.shields.io/github/stars/halysondev/docker-perfectworld-compilation?style=social) ![Issues](https://img.shields.io/github/issues/halysondev/docker-perfectworld-compilation) 
+![Downloads](https://img.shields.io/github/downloads/halysondev/docker-perfectworld-compilation/total) ![Contributors](https://img.shields.io/github/contributors/halysondev/docker-perfectworld-compilation?color=dark-green) ![Forks](https://img.shields.io/github/forks/halysondev/docker-perfectworld-compilation?style=social) ![Stargazers](https://img.shields.io/github/stars/halysondev/docker-perfectworld-compilation?style=social) ![Issues](https://img.shields.io/github/issues/halysondev/docker-perfectworld-compilation) ![License](https://img.shields.io/github/license/halysondev/docker-perfectworld-compilation) 
 
 ## Table Of Contents
 
