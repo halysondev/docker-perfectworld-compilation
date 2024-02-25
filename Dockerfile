@@ -58,7 +58,7 @@ RUN apt install -y --fix-missing libmysqlcppconn-dev
 
 RUN apt install -y --fix-missing mariadb-server mariadb-client mariadb-common
 
-RUN apt install -y --fix-missing libjsoncpp24 libjsoncpp-dev libjsoncpp-doc
+RUN apt install -y --fix-missing libjsoncpp25 libjsoncpp-dev libjsoncpp-doc
 
 RUN apt install -y --fix-missing libcurl4 libcurl4-openssl-dev
 
