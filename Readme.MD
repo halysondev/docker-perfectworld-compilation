@@ -73,18 +73,15 @@ git clone https://github.com/halysondev/docker-perfectworld-compilation.git
 ```
 
 2. Build the Docker image:
-- If you want, you can change the Debian version between latest and bullseye changing 
-```
-pwsourcedev:latest
-```
-to 
-```
-pwsourcedev:bullseye
-```
 
-Build Image:
+Build Image Latest:
 ```sh
 docker build --no-cache -t pwsourcedev:latest .
+```
+
+Build Image Bullseye:
+```sh
+docker build --no-cache -t pwsourcedev:bullseye -f Dockerfile.bullseye .
 ```
 
 ## Running the Container on Windows (PowerShell 7)
