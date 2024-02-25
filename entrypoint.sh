@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/bin/bash -e
+
+# Habilita a impressão de todos os comandos antes da execução para depuração
+set -x
 
 # Instala o Git se necessário
 if ! [ -x "$(command -v git)" ]; then
