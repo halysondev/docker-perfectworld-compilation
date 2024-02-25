@@ -114,7 +114,8 @@ RUN echo "deb http://deb.debian.org/debian/ bullseye main contrib non-free" >> /
     && apt-get update \
     && apt-get install -y gcc-10 g++-10 \
     && sed -i '/bullseye/d' /etc/apt/sources.list \
-    && apt-get update
+    && apt-get update && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN rm /usr/bin/gcc
 RUN rm /usr/bin/g++
