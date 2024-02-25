@@ -64,6 +64,8 @@ RUN apt install -y --fix-missing libcurl4 libcurl4-openssl-dev
 
 RUN apt install -y --fix-missing libmariadb3 libmariadb-dev
 
+RUN apt install -y --fix-missing upx
+
 # Cria o diretorio e ajusta as permissoes
 RUN mkdir /PWServer && chmod -R 0777 /PWServer
 

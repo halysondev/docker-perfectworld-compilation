@@ -56,6 +56,16 @@ RUN apt install -y --fix-missing libdb++-dev libdb-dev libdb5.3 libdb5.3++ libdb
 
 RUN apt install -y --fix-missing libmysqlcppconn-dev
 
+RUN apt install -y --fix-missing mariadb-server mariadb-client mariadb-common
+
+RUN apt install -y --fix-missing libjsoncpp24 libjsoncpp-dev libjsoncpp-doc
+
+RUN apt install -y --fix-missing libcurl4 libcurl4-openssl-dev
+
+RUN apt install -y --fix-missing libmariadb3 libmariadb-dev
+
+RUN apt install -y --fix-missing upx
+
 # Cria o diretorio e ajusta as permissoes
 RUN mkdir /PWServer && chmod -R 0777 /PWServer
 
