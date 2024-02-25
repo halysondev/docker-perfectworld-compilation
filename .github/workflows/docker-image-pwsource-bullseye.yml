@@ -55,15 +55,3 @@ jobs:
         run: |
           docker tag pwsourcedev:bullseye ghcr.io/${{ github.repository_owner }}/pwsourcedev:bullseye
           docker push ghcr.io/${{ github.repository_owner }}/pwsourcedev:bullseye
-
-      # Create Release
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: release-${{ steps.date.outputs.date }}
-          release_name: Release ${{ steps.date.outputs.date }}
-          draft: false
-          prerelease: false
