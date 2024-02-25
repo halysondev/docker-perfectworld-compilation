@@ -42,7 +42,7 @@ jobs:
 
       # Build the Docker image
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag pwsourcedev:bullseye
+        run: docker build . --file Dockerfile.bullseye --tag pwsourcedev:bullseye
 
       # Tag and push to Docker Hub
       - name: Tag and push to Docker Hub
