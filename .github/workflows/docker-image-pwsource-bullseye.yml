@@ -1,4 +1,4 @@
-name: Debian Bullseye Docker Image
+name: Debian Bullseye Docker Image CI
 
 on:
   push:
@@ -7,20 +7,39 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
     
+    # Login to Docker Hub
     - name: Login to Docker Hub
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    # Login to GitHub Container Registry
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
+    # Build the Docker image
     - name: Build the Docker image
-      run: docker build . --file Dockerfile.bullseye --tag halydev/pwsourcedev:bullseye
+      run: docker build . --file Dockerfile.bullseye --tag myapp:bullseye
 
-    - name: Push the Docker image
-      run: docker push halydev/pwsourcedev:bullseye
+    # Tag and push to Docker Hub
+    - name: Tag and push to Docker Hub
+      run: |
+        docker tag myapp:bullseye ${{ secrets.DOCKER_USERNAME }}/pwsourcedev:bullseye
+        docker push ${{ secrets.DOCKER_USERNAME }}/pwsourcedev:bullseye
+    
+    # Tag and push to GitHub Container Registry
+    - name: Tag and push to GitHub Container Registry
+      run: |
+        docker tag myapp:bullseye ghcr.io/${{ github.repository_owner }}/pwsourcedev:bullseye
+        docker push ghcr.io/${{ github.repository_owner }}/pwsourcedev:bullseye
