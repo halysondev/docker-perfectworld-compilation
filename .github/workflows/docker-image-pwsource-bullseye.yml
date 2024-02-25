@@ -9,37 +9,60 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    
 
     steps:
-    - uses: actions/checkout@v3
-    
-    # Login to Docker Hub
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-    
-    # Login to GitHub Container Registry
-    - name: Login to GitHub Container Registry
-      uses: docker/login-action@v1
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v3
+      
+      # Define o timestamp para ser usado como versão do release
+      - name: Get the current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
+      
+      # Login to Docker Hub
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      # Login to GitHub Container Registry
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-    # Build the Docker image
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile.bullseye --tag myapp:bullseye
+      # Build the Docker image
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile.bullseye --tag pwsourcedev:bullseye
 
-    # Tag and push to Docker Hub
-    - name: Tag and push to Docker Hub
-      run: |
-        docker tag myapp:bullseye ${{ secrets.DOCKER_USERNAME }}/pwsourcedev:bullseye
-        docker push ${{ secrets.DOCKER_USERNAME }}/pwsourcedev:bullseye
-    
-    # Tag and push to GitHub Container Registry
-    - name: Tag and push to GitHub Container Registry
-      run: |
-        docker tag myapp:bullseye ghcr.io/${{ github.repository_owner }}/pwsourcedev:bullseye
-        docker push ghcr.io/${{ github.repository_owner }}/pwsourcedev:bullseye
+      # Tag and push to Docker Hub
+      - name: Tag and push to Docker Hub
+        run: |
+          docker tag pwsourcedev:bullseye ${{ secrets.DOCKER_USERNAME }}/pwsourcedev:bullseye
+          docker push ${{ secrets.DOCKER_USERNAME }}/pwsourcedev:bullseye
+      
+      # Tag and push to GitHub Container Registry
+      - name: Tag and push to GitHub Container Registry
+        run: |
+          docker tag pwsourcedev:bullseye ghcr.io/${{ github.repository_owner }}/pwsourcedev:bullseye
+          docker push ghcr.io/${{ github.repository_owner }}/pwsourcedev:bullseye
+
+      # Create Release
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: release-${{ steps.date.outputs.date }}
+          release_name: Release ${{ steps.date.outputs.date }}
+          draft: false
+          prerelease: false
