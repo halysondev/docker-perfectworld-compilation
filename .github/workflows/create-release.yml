@@ -36,7 +36,7 @@ jobs:
 
       - name: Upload Dockerfile to Release
         run: |
-          curl \
+          curl -v \
             -X POST \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Content-Type: application/octet-stream" \
@@ -45,7 +45,7 @@ jobs:
       
       - name: Upload Dockerfile.bullseye to Release
         run: |
-          curl \
+          curl -v \
             -X POST \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Content-Type: application/octet-stream" \
@@ -54,7 +54,7 @@ jobs:
       
       - name: Upload entrypoint.sh to Release
         run: |
-          curl \
+          curl -v \
             -X POST \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Content-Type: application/octet-stream" \
