@@ -21,6 +21,7 @@ docker build --no-cache -t pwsourcedev:latest .
 
 Replace `GIT_TOKEN`, `GIT_EMAIL`, `GIT_NAME`, `GIT_URL`, and `BRANCH` with your Git configuration details before running the command:
 
+Windows Powershell 7+:
 ```powershell
 docker run -it -d `
     --name pwdev `
@@ -34,7 +35,7 @@ docker run -it -d `
     -v pwdev-server:/PWServer `
     pwsourcedev:bullseye
 ```
-
+Linux:
 ```bash
 docker run -it -d \
     --name pwdev \
@@ -58,7 +59,7 @@ docker run -it -d \
 
 ## Credits
 
-- Configuration prepared by Haly.
+- Haly.
 
 ## Notes:
 
