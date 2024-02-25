@@ -1,5 +1,5 @@
 # Especifica a imagem base
-FROM debian:latest
+FROM debian:bookworm
 
 # Adiciona arquitetura i386
 RUN dpkg --add-architecture i386 
