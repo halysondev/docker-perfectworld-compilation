@@ -36,27 +36,28 @@ jobs:
 
       - name: Upload Dockerfile to Release
         run: |
-          curl -v \
-            -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/octet-stream" \
-            --data-binary @Dockerfile \
-            "${{ steps.create_release.outputs.upload_url }}?name=Dockerfile&label=Dockerfile"
-      
+            curl -v \
+              -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Content-Type: application/octet-stream" \
+              --data-binary @"Dockerfile" \
+              "${{ steps.create_release.outputs.upload_url }}?name=Dockerfile&label=Dockerfile"
+        
       - name: Upload Dockerfile.bullseye to Release
         run: |
-          curl -v \
-            -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/octet-stream" \
-            --data-binary @Dockerfile.bullseye \
-            "${{ steps.create_release.outputs.upload_url }}?name=Dockerfile.bullseye&label=Dockerfile.bullseye"
-      
+            curl -v \
+              -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Content-Type: application/octet-stream" \
+              --data-binary @"Dockerfile.bullseye" \
+              "${{ steps.create_release.outputs.upload_url }}?name=Dockerfile.bullseye&label=Dockerfile.bullseye"
+        
       - name: Upload entrypoint.sh to Release
         run: |
-          curl -v \
-            -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/octet-stream" \
-            --data-binary @entrypoint.sh \
-            "${{ steps.create_release.outputs.upload_url }}?name=entrypoint.sh&label=entrypoint.sh"
+            curl -v \
+              -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Content-Type: application/octet-stream" \
+              --data-binary @"entrypoint.sh" \
+              "${{ steps.create_release.outputs.upload_url }}?name=entrypoint.sh&label=entrypoint.sh"
+  
