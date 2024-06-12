@@ -21,10 +21,10 @@ fi
 
 # Executa o make configure se necessário
 if [[ -f "/PWSource/Makefile" ]]; then
-  cd /PWSource && make configure
+  cd /PWSource && make clean-configure && make configure
 fi
 
-rm -Rf /PWSource/.git
+#rm -Rf /PWSource/.git
 
 # Mantém o container em execução
 exec "$@"
