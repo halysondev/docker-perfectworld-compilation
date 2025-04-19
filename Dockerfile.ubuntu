@@ -21,7 +21,7 @@ RUN apt update
 # Instala os pacotes necessarios
 RUN apt install -y --fix-missing libxml-dom-perl libxml2-dev libssl-dev libpcre3-dev
 RUN apt install -y --fix-missing libstdc++5 build-essential gcc-multilib g++-multilib libstdc++6 libgcc1
-RUN apt install -y --fix-missing zlib1g libncurses5 mc screen htop mono-complete exim4 p7zip* libpcap-dev
+RUN apt install -y --fix-missing zlib1g mc screen htop mono-complete exim4 p7zip* libpcap-dev
 
 RUN apt install -y --fix-missing curl wget ipset net-tools tzdata ntpdate
 RUN apt install -y --fix-missing make gcc g++ libssl-dev libcrypto++-dev libpcre3 libpcre3-dev
