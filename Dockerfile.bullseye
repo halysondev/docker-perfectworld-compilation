@@ -107,6 +107,8 @@ RUN chmod -R 0777 /PWSource
 # Copia o script de inicialização
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+# Converte line endings para formato Unix
+RUN dos2unix /entrypoint.sh
 
 # Define o script como ponto de entrada
 ENTRYPOINT ["/entrypoint.sh"]

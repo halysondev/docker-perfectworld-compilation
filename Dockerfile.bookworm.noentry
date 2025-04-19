@@ -123,7 +123,7 @@ RUN echo "deb http://deb.debian.org/debian/ bullseye main contrib non-free" >> /
 # Copia o script de inicialização
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-
+RUN dos2unix /entrypoint.sh
 # Define o script como ponto de entrada
 #ENTRYPOINT ["/entrypoint.sh"]
 

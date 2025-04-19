@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 # Habilita a impressão de todos os comandos antes da execução para depuração
 set -x
