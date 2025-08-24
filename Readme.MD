@@ -74,9 +74,14 @@ git clone https://github.com/halysondev/docker-perfectworld-compilation.git
 
 2. Build the Docker image:
 
-Build Image Debian Bookworm:
+Build Image Debian Trixie:
 ```sh
 docker build --no-cache -t pwsourcedev:latest .
+```
+
+Build Image Debian Bookworm:
+```sh
+docker build --no-cache -t pwsourcedev:bookworm .
 ```
 
 Build Image Debian Bullseye:

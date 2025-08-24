@@ -31,6 +31,7 @@ jobs:
           tag_name: ${{ env.RELEASE_TAG }}
           files: |
             Dockerfile
+            Dockerfile.bookworm
             Dockerfile.bullseye
             Dockerfile.ubuntu
             entrypoint.sh

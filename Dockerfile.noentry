@@ -1,0 +1,107 @@
+
+# Dockerfile optimized for Debian Trixie
+# Perfect World Server Compilation Environment
+
+FROM debian:trixie
+
+# Environment setup
+ENV DEBIAN_FRONTEND=noninteractive \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8
+
+# Configure repositories and update system
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    sed -i 's/Components: main/Components: main contrib non-free-firmware/g' /etc/apt/sources.list.d/debian.sources && \
+    apt-get update
+
+# Install essential packages, build tools, and libraries
+RUN apt-get install -y --fix-missing --no-install-recommends \
+    # Essential tools
+    curl wget git-all nano screen htop mc dos2unix upx \
+    net-tools ipset tzdata ntpsec-ntpdate dialog locales \
+    \
+    # Build essentials and compilers
+    build-essential make gcc g++ \
+    \
+    # Libraries
+    libxml-dom-perl libxml2-dev \
+    libssl-dev libcrypto++-dev \
+    libpcre2-dev \
+    libstdc++6 \
+    libgcc-s1 \
+    zlib1g \
+    libncurses6 \
+    libtesseract-dev \
+    libx11-dev \
+    libc6-dev \
+    libtemplate-plugin-xml-perl \
+    \
+    # Database libraries
+    libdb++-dev \
+    libdb-dev \
+    libdb5.3 \
+    libdb5.3++ \
+    libdb5.3++-dev \
+    libdb5.3-dbg \
+    libdb5.3-dev \
+    \
+    # MariaDB/MySQL
+    mariadb-server mariadb-client mariadb-common \
+    libmariadb3 libmariadb-dev \
+    libmariadb-dev-compat \
+    libmysqlcppconn-dev \
+    \
+    # JSON and network libraries
+    libjsoncpp-dev libjsoncpp-doc \
+    libcurl4 libcurl4-openssl-dev \
+    libpcap-dev \
+    \
+    # PHP and web server components
+    php libapache2-mod-php php-cli php-fpm \
+    php-json php-pdo php-zip php-gd php-mbstring \
+    php-curl php-xml php-pear php-bcmath php-cgi \
+    php-mysqli php-common php-phpseclib php-mysql \
+    \
+    # Additional tools
+    exim4 mono-complete p7zip-full \
+    tar xz-utils bash && \
+    \
+    # Clean up package cache
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
+
+# Configure locales
+RUN sed -i '5,$s/^# \([^ ]\)/\1/' /etc/locale.gen && \
+    locale-gen
+
+# Create directories with proper permissions
+RUN mkdir -p /PWServer /PWSource && \
+    chmod -R 0777 /PWServer /PWSource
+
+# Create symbolic links for libraries
+RUN ln -sf /PWServer/gamed/libtask.so /lib/libtask.so && \
+    ln -sf /PWServer/gamed/libskill.so /lib/libskill.so
+
+# Copy and setup entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh && \
+    dos2unix /entrypoint.sh
+
+# Set working directory
+WORKDIR /PWSource
+
+# Define entrypoint and default command
+#ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/bin/bash"]
+
+# Health check (optional)
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+    CMD pgrep -f bash > /dev/null || exit 1
+
+# Labels for better organization
+LABEL maintainer="Docker Perfect World Compilation Environment" \
+      version="1.0-noentry" \
+      description="Optimized Debian Trixie environment for Perfect World Server compilation" \
+      debian.version="trixie"
